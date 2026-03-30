@@ -1,7 +1,7 @@
 package italo.santana.itau_desafio_cartoes.mapper;
 
 import italo.santana.itau_desafio_cartoes.enums.StatusCartao;
-import italo.santana.itau_desafio_cartoes.models.dtos.CartoeOfertadosResponseDTO;
+import italo.santana.itau_desafio_cartoes.models.dtos.CartoesOfertadosResponseDTO;
 import italo.santana.itau_desafio_cartoes.models.entities.CartaoAvaliadoModel;
 import italo.santana.itau_desafio_cartoes.models.entities.CartaoOfertadoModel;
 import italo.santana.itau_desafio_cartoes.models.entities.SolicitacaoModel;
@@ -21,8 +21,8 @@ public class CartaoAvaliadoMapper {
         );
     }
 
-    public CartoeOfertadosResponseDTO modelTodto(CartaoAvaliadoModel cartaoAvaliado) {
-        return new CartoeOfertadosResponseDTO(
+    public CartoesOfertadosResponseDTO modelTodto(CartaoAvaliadoModel cartaoAvaliado) {
+        return new CartoesOfertadosResponseDTO(
                 cartaoAvaliado.getTiposDeCartoes(),
                 cartaoAvaliado.getValorAnuidadeMensal(),
                 cartaoAvaliado.getLimiteDiponivel(),
