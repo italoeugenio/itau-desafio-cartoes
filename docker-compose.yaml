@@ -8,11 +8,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: container
     depends_on:
       - cartoes-database
     networks:
       - cartoes-network
-    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4
