@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity(name = "cartaoOfertado")
-@Table(name = "cartoes_ofertados")
+@Table(name = "tb_cartoes_ofertados_tb")
 @Getter
 @Setter
 @AllArgsConstructor

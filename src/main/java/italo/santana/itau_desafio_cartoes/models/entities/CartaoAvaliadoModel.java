@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity(name = "cartoesAvaliados")
-@Table(name = "cartoes_avaliados")
+@Table(name = "tb_cartoes_avaliados_tb")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class CartaoAvaliadoModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_solicitacao", nullable = false)
-    private Solicitacao idSolicitacao;
+    private SolicitacaoModel idSolicitacaoModel;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipos_de_cartoes", nullable = false)

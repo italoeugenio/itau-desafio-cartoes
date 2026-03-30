@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity(name = "solicitacao")
-@Table(name = "solicicatcao_de_cartoes")
+@Table(name = "tb_solicitacao_de_cartoes")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Solicitacao {
+public class SolicitacaoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
