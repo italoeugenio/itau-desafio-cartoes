@@ -1,5 +1,7 @@
 package italo.santana.itau_desafio_cartoes.models.entities;
 
+
+import italo.santana.itau_desafio_cartoes.enums.StatusCartao;
 import italo.santana.itau_desafio_cartoes.enums.TiposDeCartoes;
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,22 +9,25 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity(name = "cartaoOfertado")
-@Table(name = "cartoes_ofertados")
+@Entity(name = "cartoesAvaliados")
+@Table(name = "cartoes_avaliados")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class CartaoOfertado {
+public class CartaoAvaliadoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
     private UUID id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_solicitacao", nullable = false)
+    private Solicitacao idSolicitacao;
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipos_de_cartoes", nullable = false, unique = true)
+    @Column(name = "tipos_de_cartoes", nullable = false)
     private TiposDeCartoes tiposDeCartoes;
 
     @Column(precision = 10, scale = 2, name = "valor_anuidade_mensal" , nullable = false)
@@ -34,6 +39,7 @@ public class CartaoOfertado {
     @Column(precision = 10, scale = 2, name = "renda_mensal_necessaria", nullable = false)
     private BigDecimal rendaMensalNecessaria;
 
-    @Column(name = "is_ativo", nullable = false)
-    private boolean isAtivo = true;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusCartao statusCartao;
 }
