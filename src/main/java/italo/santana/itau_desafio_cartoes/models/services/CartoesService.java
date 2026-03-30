@@ -3,20 +3,21 @@ package italo.santana.itau_desafio_cartoes.models.services;
 import italo.santana.itau_desafio_cartoes.enums.StatusCartao;
 import italo.santana.itau_desafio_cartoes.mapper.CartaoAvaliadoMapper;
 import italo.santana.itau_desafio_cartoes.mapper.ClienteMapper;
-import italo.santana.itau_desafio_cartoes.models.dtos.CartoeOfertadosResponseDTO;
+import italo.santana.itau_desafio_cartoes.models.dtos.CartoesOfertadosResponseDTO;
 import italo.santana.itau_desafio_cartoes.models.dtos.ClienteRequestDTO;
 import italo.santana.itau_desafio_cartoes.models.dtos.SolicitacaoResponseDTO;
 import italo.santana.itau_desafio_cartoes.models.entities.CartaoAvaliadoModel;
 import italo.santana.itau_desafio_cartoes.models.entities.CartaoOfertadoModel;
 import italo.santana.itau_desafio_cartoes.models.entities.SolicitacaoModel;
 import italo.santana.itau_desafio_cartoes.models.repositories.CartaoOfertadoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CartoesService {
     @Autowired
@@ -42,6 +43,7 @@ public class CartoesService {
 
     @Transactional
     public SolicitacaoResponseDTO solicitarCartoes(ClienteRequestDTO data){
+        log.info("Iniciando processamento de solicitação para: {}({})", data.nome(), data.cpf());
         clienteValidacaoService.validar(data);
 
         //Salva no banco os cartoes com status de aprovado e negado para o cliente
@@ -55,7 +57,7 @@ public class CartoesService {
 
 
         //Converte para o retorno da api
-        List<CartoeOfertadosResponseDTO> cartoesResponse = cartoesAvaliados.stream()
+        List<CartoesOfertadosResponseDTO> cartoesResponse = cartoesAvaliados.stream()
                 .filter(c -> c.getStatusCartao() == StatusCartao.APROVADO)
                 .map(c -> cartaoAvaliadoMapper.modelTodto(c))
                 .toList();

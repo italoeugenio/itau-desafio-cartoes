@@ -9,6 +9,7 @@ import java.time.Period;
 public class ClienteValidator {
 
     public static boolean isValidCpf(String cpf) {
+        cpf = cpf.replaceAll("\\D", "");
         return cpf.matches("^[0-9]{11}$");
     }
 
@@ -20,7 +21,7 @@ public class ClienteValidator {
         };
 
         for(String ufBrasilItem : ufBrasil){
-            if(uf.toUpperCase().equals(ufBrasilItem)){
+            if(uf.toUpperCase().trim().equals(ufBrasilItem)){
                 return true;
             }
         }
