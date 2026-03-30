@@ -1,0 +1,49 @@
+services:
+  cartoes-api:
+    container_name: cartoes-api
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cartoes-database
+    networks:
+      - cartoes-network
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-application
+    restart: always
+    ports:
+      - "4332:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: itau@application.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - cartoes-database
+    networks:
+      - cartoes-network
+
+  cartoes-database:
+    image: postgres:17-alpine
+    container_name: cartoes-database
+    restart: always
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: itau-cartoes
+    volumes:
+      - cartoes-database-data:/var/lib/postgresql/data
+    networks:
+      - cartoes-network
+
+volumes:
+  cartoes-database-data:
+
+networks:
+  cartoes-network:
+    driver: bridge
