@@ -10,6 +10,6 @@ public record SolicitacaoResponseDTO(
         UUID numeroSolicitacao,
         LocalDateTime dataSolicitacao,
         Cliente cliente,
-        List<CartoeOfertadosResponseDTO> cartoeOfertados
+        List<CartoesOfertadosResponseDTO> cartoeOfertados
 ) {
 }
