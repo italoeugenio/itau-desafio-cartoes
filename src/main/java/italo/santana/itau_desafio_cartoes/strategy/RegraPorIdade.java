@@ -11,8 +11,8 @@ import java.util.List;
 public class RegraPorIdade implements ElegebilidadeRule {
     @Override
     public List<CartaoOfertadoModel> aplicar(ClienteRequestDTO cliente, List<CartaoOfertadoModel> cartao) {
-        if (cliente.idade() >= 18 && cliente.idade() < 25) {
-            cartao.stream()
+        if (cliente.idade() > 18 && cliente.idade() < 25) {
+            return cartao.stream()
                     .filter(c -> c.getTiposDeCartoes() == TiposDeCartoes.CARTAO_SEM_ANUIDADE)
                     .toList();
         }
